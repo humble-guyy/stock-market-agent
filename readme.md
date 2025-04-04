@@ -6,6 +6,10 @@
 
 The Stock Market AI Agent is a Python-based backend API that fetches real-time stock prices using Yahoo Finance and generates buy/hold/sell recommendations using an LLM API (OpenRouter's DeepSeek V3 free API) orchestrated via LangChain. Built with FastAPI and served by Uvicorn, the solution is designed to be lightweight, stateless, and deployable on a public hosting platform (Railway). This project demonstrates an end-to-end system that integrates financial data retrieval, AI-driven decision-making, and RESTful API design.
 
+NOTE: 
+- For US stock tickers (e.g., `AAPL`, `NVDA`), you can use the symbol directly.
+- For Indian stocks, append the correct suffix: use `.NS` for stocks on the NSE (e.g., `RELIANCE.NS`) and `.BO` for the BSE (if applicable).
+
 
 ## Live Testing
 
@@ -23,8 +27,10 @@ Access the interactive API documentation provided by FastAPI:
 ### 2. curl (Command Line)
 Open a terminal or PowerShell and run:  
 ```bash
-curl -X GET "https://web-production-677e.up.railway.app/stock?ticker=NVDA" -H "accept: application/json"
+(Invoke-WebRequest -Uri "https://web-production-677e.up.railway.app/stock?ticker=NVDA" -Headers @{ "accept" = "application/json" } -Method Get).Content
+
 ```
+You can change NVDA(NVIDIA STOCK TICKER) with any US based Company
 This command sends a GET request and returns the JSON response.
 
 ### 3. Postman:
