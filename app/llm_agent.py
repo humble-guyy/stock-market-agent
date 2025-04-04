@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 # Load environment variables from the .env file
 load_dotenv()
 
-# Retrieve the OpenRouter API key from environment variables.
+# Retrieve the OpenRouter API key from environment variables
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 if not OPENROUTER_API_KEY:
     raise ValueError("OPENROUTER_API_KEY is missing. Please set it in the .env file.")
@@ -29,13 +29,13 @@ def fetch_stock_price(ticker: str) -> float:
 
 def analyze_stock(ticker: str) -> dict:
     """
-    Uses OpenRouter's DeepSeek V3 API to generate a buy/sell/hold recommendation
-    with a clear final decision and a detailed explanation.
+    Uses OpenRouter's DeepSeek V3 API to generate a buy/sell/hold recommendation.
+    It fetches the latest stock price and sends it to the model for analysis.
     """
-    # Fetch the latest stock price using Yahoo Finance
+    # Fetch the latest stock price
     stock_price = fetch_stock_price(ticker)
     
-    # Prepare the request payload for the DeepSeek API via OpenRouter
+    # Prepare the request for OpenRouter's DeepSeek API
     url = "https://openrouter.ai/api/v1/chat/completions"
     headers = {
         "Authorization": f"Bearer {OPENROUTER_API_KEY}",
@@ -54,14 +54,14 @@ def analyze_stock(ticker: str) -> dict:
             )}
         ]
     }
-    
+
     response = requests.post(url, headers=headers, json=data)
     if response.status_code != 200:
         raise ValueError(f"Error generating recommendation: {response.text}")
-    
+
     result = response.json()
     recommendation = result.get("choices", [{}])[0].get("message", {}).get("content", "No recommendation provided.")
-    
+
     return {
         "ticker": ticker,
         "price": stock_price,
