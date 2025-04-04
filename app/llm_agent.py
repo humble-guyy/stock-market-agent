@@ -8,6 +8,7 @@ load_dotenv()
 
 # Retrieve the OpenRouter API key from the environment variable.
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
+print("DEBUG: OPENROUTER_API_KEY =", OPENROUTER_API_KEY)
 if not OPENROUTER_API_KEY:
     raise ValueError("Missing OPENROUTER_API_KEY environment variable. Please set it in your .env file.")
 
