@@ -203,3 +203,11 @@ curl -X GET "http://127.0.0.1:8000/stock?ticker=NVDA" -H "accept: application/js
 Or use Postman to send a GET request to http://127.0.0.1:8000/stock?ticker=NVDA.
 ```
 
+
+
+## Roadmap
+
+- Additional browser support
+
+- Add more integrations
+
